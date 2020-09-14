@@ -13,15 +13,14 @@
         </button>
 
         <!-- LIST -->
-        <ListNotes :propNotes="notes" :propEditNote="editNote" />
+        <ListNotes :propEditNote="editNote" />
 
       </div>
     </div>
 
     <div class="kanan">
       <!-- FORM -->
-      <FormNotes :propSaveNote="saveNote" :propUpdateNote="updateNote" :propRemoveNote="removeNote"
-        :propDataForm="dataForm" />
+      <FormNotes :propSaveNote="saveNote" :propUpdateNote="updateNote" :propRemoveNote="removeNote" />
     </div>
 
   </div>
@@ -35,11 +34,6 @@
     name: 'app',
     data: function () {
       return {
-        dataForm: {},
-        notes: [
-          { id: 1, title: 'Test', description: 'Ini cuma percobaan hahaha' },
-          { id: 2, title: 'Bambang', description: 'Ini cuma percobaan bambang' }
-        ]
       }
     },
     components: {
