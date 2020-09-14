@@ -28,24 +28,36 @@
 
                 this.$root.$emit('emitForm', dataForm);
             },
-            resetInput() {
-                this.id = 0;
-                this.title = '';
-                this.description = '';
+            createNewId() {
+                let newId = 0;
+
+                if (this.notes.length === 0) {
+                    newId = 1;
+                } else {
+                    newId = this.notes[this.notes.length - 1].id + 1;
+                }
+
+                return newId;
             }
         },
         mounted() {
             this.$root.$on("emitRemoveNote", data => {
                 let noteIndex = this.notes.findIndex(note => note.id === data.id);
                 this.notes.splice(noteIndex, 1);
-            })
+            });
             this.$root.$on("emitUpdateNote", data => {
                 let noteIndex = this.notes.findIndex(note => note.id === data.id);
 
                 this.notes[noteIndex].title = data.title;
                 this.notes[noteIndex].description = data.description;
-                this.resetInput();
-            })
+            });
+            this.$root.$on("emitSaveNote", data => {
+                let newId = this.createNewId();
+                let newNote = { "id": newId, "title": data.title, "description": data.description }
+
+                this.notes.push(newNote)
+                this.editNote(newId)
+            });
         },
     }
 </script>
