@@ -14,11 +14,6 @@
 <script type="text/javascript">
     export default {
         name: 'listNotes',
-        props: {
-            propEditNote: {
-                type: Function
-            }
-        },
         data: function () {
             return {
                 notes: [
@@ -33,12 +28,23 @@
 
                 this.$root.$emit('emitForm', dataForm);
             },
+            resetInput() {
+                this.id = 0;
+                this.title = '';
+                this.description = '';
+            }
         },
         mounted() {
             this.$root.$on("emitRemoveNote", data => {
                 let noteIndex = this.notes.findIndex(note => note.id === data.id);
                 this.notes.splice(noteIndex, 1);
+            })
+            this.$root.$on("emitUpdateNote", data => {
+                let noteIndex = this.notes.findIndex(note => note.id === data.id);
 
+                this.notes[noteIndex].title = data.title;
+                this.notes[noteIndex].description = data.description;
+                this.resetInput();
             })
         },
     }

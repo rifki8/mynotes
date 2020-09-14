@@ -13,14 +13,14 @@
         </button>
 
         <!-- LIST -->
-        <ListNotes :propEditNote="editNote" />
+        <ListNotes />
 
       </div>
     </div>
 
     <div class="kanan">
       <!-- FORM -->
-      <FormNotes :propSaveNote="saveNote" :propUpdateNote="updateNote" />
+      <FormNotes :propSaveNote="saveNote" />
     </div>
 
   </div>
@@ -61,13 +61,6 @@
         this.notes.push(newNote)
         this.editNote(newId)
         // this.newNote();
-      },
-      updateNote(id, title, description) {
-        let noteIndex = this.notes.findIndex(note => note.id === id);
-
-        this.notes[noteIndex].title = title;
-        this.notes[noteIndex].description = description;
-        this.newNote();
       },
     },
   }
