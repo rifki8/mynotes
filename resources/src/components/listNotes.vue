@@ -12,17 +12,23 @@
 </template>
 
 <script type="text/javascript">
+
+    import axios from 'axios';
+
     export default {
         name: 'listNotes',
         data: function () {
             return {
-                notes: [
-                    { id: 1, title: 'Test', description: 'Ini cuma percobaan hahaha' },
-                    { id: 2, title: 'Bambang', description: 'Ini cuma percobaan bambang' }
-                ]
+                notes: []
             }
         },
         methods: {
+            getData() {
+                axios.get('http://localhost/mynotes/note')
+                    .then(res => {
+                        this.notes = res.data;
+                    })
+            },
             editNote(id) {
                 let dataForm = this.notes.find(note => note.id === id);
                 dataForm.mode = 'update';
@@ -41,6 +47,7 @@
             }
         },
         mounted() {
+            this.getData();
             this.$root.$on("emitRemoveNote", data => {
                 let noteIndex = this.notes.findIndex(note => note.id === data.id);
                 this.notes.splice(noteIndex, 1);
