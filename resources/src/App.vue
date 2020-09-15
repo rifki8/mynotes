@@ -13,15 +13,14 @@
         </button>
 
         <!-- LIST -->
-        <ListNotes :propNotes="notes" :propEditNote="editNote" />
+        <ListNotes />
 
       </div>
     </div>
 
     <div class="kanan">
       <!-- FORM -->
-      <FormNotes :propSaveNote="saveNote" :propUpdateNote="updateNote" :propRemoveNote="removeNote"
-        :propDataForm="dataForm" />
+      <FormNotes />
     </div>
 
   </div>
@@ -35,11 +34,6 @@
     name: 'app',
     data: function () {
       return {
-        dataForm: {},
-        notes: [
-          { id: 1, title: 'Test', description: 'Ini cuma percobaan hahaha' },
-          { id: 2, title: 'Bambang', description: 'Ini cuma percobaan bambang' }
-        ]
       }
     },
     components: {
@@ -48,38 +42,8 @@
     },
     methods: {
       newNote() {
-        this.dataForm = { id: 0, title: '', description: '', mode: 'save' }
-      },
-      editNote(id) {
-        this.dataForm = this.notes.find(note => note.id === id);
-        this.dataForm.mode = 'update';
-      },
-      saveNote(title, description) {
-        let newId = 0;
-
-        if (this.notes.length === 0) {
-          newId = 1;
-        } else {
-          newId = this.notes[this.notes.length - 1].id + 1;
-        }
-
-        let newNote = { "id": newId, "title": title, "description": description }
-
-        this.notes.push(newNote)
-        this.editNote(newId)
-        // this.newNote();
-      },
-      updateNote(id, title, description) {
-        let noteIndex = this.notes.findIndex(note => note.id === id);
-
-        this.notes[noteIndex].title = title;
-        this.notes[noteIndex].description = description;
-        this.newNote();
-      },
-      removeNote(id) {
-        let noteIndex = this.notes.findIndex(note => note.id === id);
-
-        this.notes.splice(noteIndex, 1);
+        let dataForm = { id: 0, title: '', description: '', mode: 'save' }
+        this.$root.$emit('emitForm', dataForm);
       },
     },
   }
