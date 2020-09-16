@@ -71,9 +71,20 @@
                     })
             },
             submitRemove() {
-                let data = { id: this.id };
-                this.$root.$emit('emitRemoveNote', data)
-                this.resetInput();
+                let params = new URLSearchParams;
+                params.append('id', this.id);
+
+                axios.post("http://localhost/mynotes/note/delete", params)
+                    .then(res => {
+                        let data = {
+                            id: res.data.id,
+                        }
+                        this.$root.$emit('emitRemoveNote', data);
+                        if (res.data.status === true) {
+                            alert(res.data.pesan);
+                        }
+                        this.resetInput();
+                    })
             },
             resetInput() {
                 this.id = 0;
