@@ -18,6 +18,9 @@
 </template>
 
 <script type="text/javascript">
+
+    import axios from 'axios';
+
     export default {
         name: 'formNotes',
         data: function () {
@@ -30,12 +33,20 @@
         },
         methods: {
             submitSave() {
-                let data = {
-                    title: this.title,
-                    description: this.description,
-                }
+                let params = new URLSearchParams;
+                params.append('title', this.title);
+                params.append('description', this.description);
 
-                this.$root.$emit('emitSaveNote', data);
+                axios.post("http://localhost/mynotes/note/create", params)
+                    .then(res => {
+                        let data = {
+                            id: res.data.id,
+                            title: this.title,
+                            description: this.description,
+                        }
+                        this.$root.$emit('emitSaveNote', data);
+                    })
+
             },
             submitUpdate() {
                 let data = {
