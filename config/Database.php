@@ -2,9 +2,9 @@
 
      class Database{
           private $host  = 'localhost';
-          private $user  = 'root';
-          private $password   = "";
-          private $database  = "mynotes";
+          private $user  = 'mrifkimy_rifki';
+          private $password   = "rifkinotes86";
+          private $database  = "mrifkimy_notes";
 
           public function koneksi(){
                try {

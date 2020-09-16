@@ -24,7 +24,7 @@
         },
         methods: {
             getData() {
-                axios.get('http://localhost/mynotes/note')
+                axios.get('http://note.mrifki.my.id/note')
                     .then(res => {
                         this.notes = res.data;
                     })

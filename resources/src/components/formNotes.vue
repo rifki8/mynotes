@@ -37,7 +37,7 @@
                 params.append('title', this.title);
                 params.append('description', this.description);
 
-                axios.post("http://localhost/mynotes/note/create", params)
+                axios.post("http://note.mrifki.my.id/note/create", params)
                     .then(res => {
                         let data = {
                             id: res.data.id,
@@ -57,7 +57,7 @@
                 params.append('title', this.title);
                 params.append('description', this.description);
 
-                axios.post("http://localhost/mynotes/note/update", params)
+                axios.post("http://note.mrifki.my.id/note/update", params)
                     .then(res => {
                         let data = {
                             id: res.data.id,
@@ -74,7 +74,7 @@
                 let params = new URLSearchParams;
                 params.append('id', this.id);
 
-                axios.post("http://localhost/mynotes/note/delete", params)
+                axios.post("http://note.mrifki.my.id/note/delete", params)
                     .then(res => {
                         let data = {
                             id: res.data.id,
