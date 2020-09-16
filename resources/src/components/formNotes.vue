@@ -45,17 +45,30 @@
                             description: this.description,
                         }
                         this.$root.$emit('emitSaveNote', data);
+                        if (res.data.status === true) {
+                            alert(res.data.pesan);
+                        }
                     })
 
             },
             submitUpdate() {
-                let data = {
-                    id: this.id,
-                    title: this.title,
-                    description: this.description,
-                }
+                let params = new URLSearchParams;
+                params.append('id', this.id);
+                params.append('title', this.title);
+                params.append('description', this.description);
 
-                this.$root.$emit('emitUpdateNote', data);
+                axios.post("http://localhost/mynotes/note/update", params)
+                    .then(res => {
+                        let data = {
+                            id: res.data.id,
+                            title: this.title,
+                            description: this.description,
+                        }
+                        this.$root.$emit('emitUpdateNote', data);
+                        if (res.data.status === true) {
+                            alert(res.data.pesan);
+                        }
+                    })
             },
             submitRemove() {
                 let data = { id: this.id };
